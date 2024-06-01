@@ -37,6 +37,8 @@ import cookieParser from "cookie-parser";
 import { Server } from "socket.io";
 // Importación del model de mensajes:
 import { messageModel } from "./models/message.model.js";
+// Importación del mock:
+import { generateUser, generateProduct } from "./utils/productsMock.js";
 
 // Variables env:
 const { port } = configObject;
@@ -83,6 +85,15 @@ app.use("/api/carts", cartsApiRouter);
 app.use("/api/users", usersApiRouter);
 // Endpoint de la ruta de views:
 app.use("/", viewsRouter);
+
+app.get("/mockingproducts", (request, response) => {
+  // Get que retorna los mocking products:
+  const products = [];
+  for (let i = 0; i < 100; i++) {
+    products.push(generateUser());
+  }
+  response.send({ status: "succes", payload: products });
+});
 
 // PUERTO:
 // Función que escucha cualquier cambio en el servidor:
