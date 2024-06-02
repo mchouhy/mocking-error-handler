@@ -15,6 +15,8 @@ import { cartsApiRouter } from "./routes/api/carts.api.router.js";
 import { usersApiRouter } from "./routes/api/users.api.router.js";
 // Importación de las rutas de views:
 import viewsRouter from "./routes/views.router.js";
+// Importación de las rutas de mocking products:
+import { mockingProductsApiRouter } from "./routes/api/mockingProducts.api.router.js";
 // Importación de la conexión a la base de datos de Mongo Atlas:
 import "./database.js";
 // Importación de Cors:
@@ -33,12 +35,6 @@ import { fileURLToPath } from "url";
 import { authMiddleware } from "./middlewares/auth.js";
 // Importación de cookie parser:
 import cookieParser from "cookie-parser";
-// Importación del Socket.io (https://socket.io/docs/v4/tutorial/introduction):
-import { Server } from "socket.io";
-// Importación del model de mensajes:
-import { messageModel } from "./models/message.model.js";
-// Importación del mock:
-import { generateUser, generateProduct } from "./utils/productsMock.js";
 
 // Variables env:
 const { port } = configObject;
@@ -83,17 +79,10 @@ app.use("/api/products", productsApiRouter);
 app.use("/api/carts", cartsApiRouter);
 // Endpoint de la ruta de api users:
 app.use("/api/users", usersApiRouter);
+// Endpoint de la ruta de api mocking products:
+app.use("/api/mockingproducts", mockingProductsApiRouter);
 // Endpoint de la ruta de views:
 app.use("/", viewsRouter);
-
-app.get("/mockingproducts", (request, response) => {
-  // Get que retorna los mocking products:
-  const products = [];
-  for (let i = 0; i < 100; i++) {
-    products.push(generateUser());
-  }
-  response.send({ status: "succes", payload: products });
-});
 
 // PUERTO:
 // Función que escucha cualquier cambio en el servidor:
