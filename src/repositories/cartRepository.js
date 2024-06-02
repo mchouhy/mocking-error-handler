@@ -41,7 +41,7 @@ export class CartRepository {
       const cart = await this.getCartById(cartId);
       // Valicación si existe un producto con el id ingresado por parámetro.
       const existingProduct = cart.products.find(
-        (item) => item.product.toString() === prodId
+        (item) => item.product._id.toString() === prodId
       );
       // En caso de que exista:
       if (existingProduct) {
@@ -60,7 +60,7 @@ export class CartRepository {
     }
   };
 
-  deleteProduct = async (cartId, prodId) => {
+  deleteProductById = async (cartId, prodId) => {
     try {
       // Se trae el cart de la base de datos por id:
       const cart = await cartModel.findById(cartId);

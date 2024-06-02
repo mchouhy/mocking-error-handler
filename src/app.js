@@ -80,7 +80,7 @@ app.use("/api/carts", cartsApiRouter);
 // Endpoint de la ruta de api users:
 app.use("/api/users", usersApiRouter);
 // Endpoint de la ruta de api mocking products:
-app.use("/api/mockingproducts", mockingProductsApiRouter);
+app.use("/mockingproducts", mockingProductsApiRouter);
 // Endpoint de la ruta de views:
 app.use("/", viewsRouter);
 

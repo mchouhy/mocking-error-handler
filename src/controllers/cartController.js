@@ -49,7 +49,6 @@ export class CartController {
     try {
       await cartRepository.addProduct(cartId, prodId, quantity);
       const cartID = request.user.cart.toString();
-      //response.json(updateCart.products);
       response.redirect(`/carts/${cartID}`);
     } catch (error) {
       response
@@ -62,7 +61,7 @@ export class CartController {
     const cartId = request.params.cid;
     const prodId = request.params.pid;
     try {
-      const updateCart = await cartRepository.deleteProduct(cartId, prodId);
+      const updateCart = await cartRepository.deleteProductById(cartId, prodId);
       response.json({
         status: "success",
         message: "Producto eliminado con éxito.",

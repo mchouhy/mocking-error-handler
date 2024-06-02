@@ -6,7 +6,7 @@ import { UserDTO } from "../dto/user.dto.js";
 
 export class ViewController {
   async renderProducts(request, response) {
-    let { limit = 2, page = 1, sort, query } = request.query;
+    let { limit = 8, page = 1, sort, query } = request.query;
     try {
       const products = await productRepository.getProducts({
         limit: parseInt(limit),
@@ -16,8 +16,10 @@ export class ViewController {
       });
       const productsArray = products.data.map((product) => {
         const { _id, ...rest } = product.toObject();
-        return rest;
+        return { id: _id, ...rest };
       });
+
+      const cartId = request.user.cart.toString();
 
       const user = request.user
         ? new UserDTO(
@@ -40,6 +42,7 @@ export class ViewController {
         limit,
         user,
         isAdmin: user && user.role === "admin",
+        cartId,
       });
     } catch (error) {
       console.log("Error al obtener los productos de la base de datos.", error);
@@ -57,7 +60,6 @@ export class ViewController {
         const quantity = item.quantity;
         const totalPrice = product.price * quantity;
         totalOrder += totalPrice;
-
         return {
           product: { ...product, totalPrice },
           quantity,
