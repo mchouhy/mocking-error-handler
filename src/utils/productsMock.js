@@ -25,19 +25,3 @@ export const generateProduct = () => {
     category: randomCategory,
   };
 };
-
-// export const generateUser = () => {
-//   const productsQuantity = parseInt(faker.string.numeric(5));
-//   let products = [];
-//   for (let i = 0; i < productsQuantity; i++) {
-//     products.push(generateProduct());
-//     return {
-//       id: faker.database.mongodbObjectId(),
-//       first_name: faker.person.firstName(),
-//       last_name: faker.person.lastName(),
-//       gender: faker.person.gender(),
-//       email: faker.internet.email(),
-//       products,
-//     };
-//   }
-// };

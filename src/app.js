@@ -35,6 +35,8 @@ import { fileURLToPath } from "url";
 import { authMiddleware } from "./middlewares/auth.js";
 // Importación de cookie parser:
 import cookieParser from "cookie-parser";
+// Importación del manejador de errores:
+import errorHandler from "./middlewares/errors.js";
 
 // Variables env:
 const { port } = configObject;
@@ -55,6 +57,8 @@ app.use(passport.initialize());
 app.use(cookieParser());
 // Middleware de auth de passport:
 app.use(authMiddleware);
+// Manejo de errores:
+app.use(errorHandler);
 
 // HANDLEBARS:
 // Crea una instancia del motor de plantillas Handlebars:
