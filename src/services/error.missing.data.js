@@ -1,10 +1,13 @@
-const missingDataError = (usuario) => {
+const missingUserDataError = (parameter) => {
   return `Datos incompletos o inválidos.
     Necesitamos recibir los siguientes datos: 
-    - Nombre: String, pero recibimos ${usuario.nombre}
-    - Apellido: String, pero recibimos ${usuario.apellido}
-    - Email: String, pero recibimos ${usuario.email}
+    - Nombre: Esperábamos un String, pero recibimos ${parameter.nombre}
+    - Apellido: Esperábamos un String, pero recibimos $sa{parameter.apellido}
+    - Email: Esperábamos un String, pero recibimos ${parameter.email}
     `;
 };
+const missingCartDataError = () => {
+  return "No se ha ingresado el cartId. Necesitamos el cartId para poder devolver los productos del carrito de compras.";
+};
 
-export default generarInfoError;
+export default { missingUserDataError, missingCartDataError };

@@ -47,6 +47,7 @@ export class ProductRepository {
       };
     } catch (error) {
       console.log("Error al intentar ejecutar getProducts", error);
+      throw new error();
     }
   };
 

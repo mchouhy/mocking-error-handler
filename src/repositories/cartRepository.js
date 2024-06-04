@@ -1,6 +1,7 @@
 // Importación del model de carts:
 import { cartModel } from "../models/carts.model.js";
-
+import CustomError from "../services/error.custom.js";
+import missingCartDataError from "../services/error.missing.data.js";
 //Función de clase constructora que recibe la ruta a trabajar desde el momento de generar la instancia.
 export class CartRepository {
   createCart = async () => {
@@ -30,8 +31,11 @@ export class CartRepository {
       // Se retorna el cart seleccionado por id.
       return cart;
     } catch (error) {
-      console.log("Error en el servidor al buscar el cart por id", error);
-      throw error;
+      throw CustomError.createError({
+        name: "Devolver carrito de compras desde el servidor",
+        cause: missingCartDataError(),
+        code: 3,
+      });
     }
   };
 
