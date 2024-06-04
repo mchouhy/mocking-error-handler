@@ -4,10 +4,14 @@ const errorHandler = (error, request, response, next) => {
   console.log(error.cause);
   switch (error.code) {
     case EErrors.INVALID_TYPE:
-      res.send({ status: "error", error: error.name });
+      response.send({ status: "error", error: error.name });
       break;
     default:
-      res.send({ status: "error", error: "Unknown error." });
+      response.send({ status: "error", error: "Unknown error." });
+
+    case EErrors.DB_ERROR:
+      response.send({ status: "error", error: error.name });
+      break;
   }
 };
 
